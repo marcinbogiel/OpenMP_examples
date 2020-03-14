@@ -1,6 +1,11 @@
 #include <omp.h> 
 #include <stdio.h> 
 #include <stdlib.h> 
+
+/*
+    Default program for computing integral given as an example
+    to modify along the course 'Introduction to OpenMP' by Tim Morrison.
+*/
   
 static long num_steps = 100000;
 double step; 
