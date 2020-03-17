@@ -3,7 +3,14 @@
 #include <stdlib.h> 
 
 /*
-    bbbb
+
+    The exercise was about taking written serial code for
+    numerical integral computing and making it parallel 
+    with 'parallel for' construct. The main purpose of the task itself
+    was to use instructions covered in two previous lessons
+    of the course:
+        - schedule clauses(with parameters);
+        - reduction (picked in right place);
 */
   
 static long num_steps = 100000;
@@ -20,8 +27,6 @@ int main(int argc, char **argv)
 
     #pragma omp parallel for schedule(static, 4) reduction(+ : sum)
     for(i=0;i<num_steps;i++){
-        //printf("\nIteracja nr %d wykonana prze watek nr %d.",i,omp_get_thread_num());
-        
         sum += 4.0/(1.0+((i+0.5)*step)*((i+0.5)*step));
     }
     pi = step * sum;
