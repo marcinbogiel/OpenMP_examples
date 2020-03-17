@@ -11,6 +11,9 @@
     of the course:
         - schedule clauses(with parameters);
         - reduction (picked in right place);
+
+    You can find the video with given exercise here:
+    https://www.youtube.com/watch?v=iPb6OLhDEmM#t=6m11s
 */
   
 static long num_steps = 100000;
