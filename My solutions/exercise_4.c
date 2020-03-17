@@ -11,22 +11,18 @@ double step;
 
 int main(int argc, char **argv)
 { 
-    int i; double x, pi, sum = 0.0;
+    int i;
+    double pi, sum = 0.0;
 
     step = 1.0/(double) num_steps;
 
     double start_time = omp_get_wtime();
 
-    int threads = 4;
-
-    //omp_set_num_threads(4);
- 
-    #pragma omp parallel for
+    #pragma omp parallel for schedule(static, 4) reduction(+ : sum)
     for(i=0;i<num_steps;i++){
-        printf("\nIteracja nr %d wykonana prze watek nr %d.",i,omp_get_thread_num());
+        //printf("\nIteracja nr %d wykonana prze watek nr %d.",i,omp_get_thread_num());
         
-        //x = (i+0.5)*step;
-        //sum += 4.0/(1.0+((i+0.5)*step)*((i+0.5)*step));
+        sum += 4.0/(1.0+((i+0.5)*step)*((i+0.5)*step));
     }
     pi = step * sum;
 
