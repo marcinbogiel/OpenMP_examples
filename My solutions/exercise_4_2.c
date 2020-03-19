@@ -114,7 +114,11 @@ int get_amount_of(char *picked_item)
     {
         system("@cls||clear");
 
-        printf("\nPick number of %s: ",picked_item);
+        printf("\nPick number of %s",picked_item);
+        if(strcmp(picked_item,"threads")==0)
+            printf("(suggested %d)",omp_get_max_threads());
+        printf(": ",picked_item);
+
         scanf("%d",&user_pick);
     }
 
