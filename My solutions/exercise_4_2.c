@@ -5,25 +5,32 @@
 
 /*
     You can find the video with given exercise here:
-    https://www.youtube.com/watch?v=iPb6OLhDEmM#t=6m11s
+    
 */
   
 static long num_steps = 100000;
 double step; 
 
 omp_sched_t get_schema_of_loop();
+int get_amount_of(char *picked_item);
 
-int main(int argc, char **argv)
+int main(int argc, char *argv)
 { 
     int i;
     double pi, sum = 0.0;
     step = 1.0/(double) num_steps;
 
-    omp_set_num_threads(4);
-    omp_sched_t loop_schema = get_schema_of_loop();
-    int chunks = 4;
+    char operation[8];
+    strcpy(operation, "threads");
+    int threads_amount = get_amount_of(operation);
 
-    omp_set_schedule(loop_schema,chunks);
+    omp_sched_t loop_schema = get_schema_of_loop();
+
+    strcpy(operation, "chunks");
+    int chunks_amount = get_amount_of(operation);
+
+    omp_set_num_threads(threads_amount);
+    omp_set_schedule(loop_schema,chunks_amount);
 
    double start_time = omp_get_wtime();
 
@@ -34,7 +41,7 @@ int main(int argc, char **argv)
     pi = step * sum;
     double end_time = omp_get_wtime();
 
-    omp_get_schedule(&loop_schema,&chunks);
+    omp_get_schedule(&loop_schema,&chunks_amount);
 
     char str_used_schema_type[20];
 
@@ -57,7 +64,8 @@ int main(int argc, char **argv)
             break;
     }
 
-    printf("\nResult for parraled code with %s schema is: %f. \nAnd it was counted in %f seconds.\n",str_used_schema_type,pi,end_time-start_time);
+    printf("\nResult  is: %f. \nAnd it was counted in %f seconds.\n",pi,end_time-start_time);
+    printf("It was computed with %d threads, %s schema and %d chunks. \n\n",threads_amount,str_used_schema_type,chunks_amount);
 } 
 
 omp_sched_t get_schema_of_loop()
@@ -96,4 +104,19 @@ omp_sched_t get_schema_of_loop()
                 system("pause");
                 break;
         }
+}
+
+int get_amount_of(char *picked_item)
+{
+    int user_pick = 0;
+
+    while(user_pick<1)
+    {
+        system("@cls||clear");
+
+        printf("\nPick number of %s: ",picked_item);
+        scanf("%d",&user_pick);
+    }
+
+    return user_pick;
 }
