@@ -1,6 +1,7 @@
 #include <omp.h> 
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <string.h>
 
 /*
 
@@ -45,13 +46,31 @@ int main(int argc, char **argv)
 
     double end_time = omp_get_wtime();
 
-    //loop_schema = omp_get_schedule();
+    omp_sched_t used_schema_type;
+    omp_get_schedule(&used_schema_type,&chunks);
 
     printf("\n");
 
-    //printf(omp_get_schedule());
+    char str_used_schema_type[20];
 
-    printf("\n");
+    switch(used_schema_type)
+    {
+        case omp_sched_static:
+            strcpy(str_used_schema_type, "static");  
+            break;
+        case omp_sched_dynamic:
+            strcpy(str_used_schema_type, "dynamic");  
+            break;
+        case omp_sched_guided:
+            strcpy(str_used_schema_type, "guided"); 
+            break;
+        case omp_sched_auto:
+            strcpy(str_used_schema_type, "auto"); 
+            break;
+        default:
+            strcpy(str_used_schema_type, "not defined");
+            break;
+    }
 
-    printf("\nResult for parraled code is: %f with  and it was counted in %f seconds.\n",pi,end_time-start_time);
+    printf("\nResult for parraled code with %c schema is: %f and it was counted in %f seconds.\n",(char)used_schema_type,pi,end_time-start_time);
 } 
