@@ -26,6 +26,11 @@ You can run your program in Terminal by putting:
 ./output_name 
 (no  *.out extension required)
 
+To run it more than once you can put bash commands:
+    for i in {1..10}; do ./output_name parameter_1 parameter_2; done;
+
+    (where  parameters parameter_1 and parameter_2 are optional)
+
 Compiling tips:
 1. Don't forget to put '-fopenmp' after gcc declaration. Otherwise compiler won't recognize <omp.h>
 2. gcc-9 is my compiler file(check installing gcc in previous section). Running it just as 'gcc -fopenmp...' doesn't work.
