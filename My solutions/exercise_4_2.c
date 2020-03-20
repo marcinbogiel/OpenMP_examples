@@ -16,7 +16,7 @@ int get_amount_of(char *picked_item);
 const char * set_used_schema_type(omp_sched_t loop_schema);
 void configure_parallel_environment();
 void set_parallel_environment();
-double calculate_the_integral();
+void calculate_the_integral();
 void display_summary();
 
 int threads_amount;
@@ -30,7 +30,7 @@ int main(int argc, char *argv)
 { 
     configure_parallel_environment();
     set_parallel_environment();
-    program_result = calculate_the_integral();
+    calculate_the_integral();
     display_summary();
 } 
 
@@ -126,9 +126,9 @@ void set_parallel_environment()
     omp_set_schedule(loop_schema,chunks_amount);
 }
 
-double calculate_the_integral()
+void calculate_the_integral()
 {
-    double result,sum = 0.0;
+    double sum = 0.0;
     int i;
     step = 1.0/(double) num_steps;
 
@@ -137,9 +137,8 @@ double calculate_the_integral()
     for(i=0;i<num_steps;i++){
         sum += 4.0/(1.0+((i+0.5)*step)*((i+0.5)*step));
     }
-    result = step * sum;
+    program_result = step * sum;
     end_time = omp_get_wtime();
-    return result;
 }
 
 void display_summary()
