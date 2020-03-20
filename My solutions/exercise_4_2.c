@@ -15,39 +15,33 @@ omp_sched_t get_schema_of_loop();
 int get_amount_of(char *picked_item);
 const char * set_used_schema_type(omp_sched_t loop_schema);
 void configure_parallel_environment();
+void set_parallel_environment();
+double calculate_the_integral();
 
 int threads_amount;
 omp_sched_t loop_schema;
 int chunks_amount;
+double program_result;
+double start_time, end_time;
 
 int main(int argc, char *argv)
 { 
-    int i;
-    double pi, sum = 0.0;
-    step = 1.0/(double) num_steps;
+    char str_used_schema_type[20];
+    
+    configure_parallel_environment();
+    set_parallel_environment();
+
     
 
-    configure_parallel_environment();
-
-    omp_set_num_threads(threads_amount);
-    omp_set_schedule(loop_schema,chunks_amount);
-
-   double start_time = omp_get_wtime();
-
-    #pragma omp parallel for reduction(+ : sum)
-    for(i=0;i<num_steps;i++){
-        sum += 4.0/(1.0+((i+0.5)*step)*((i+0.5)*step));
-    }
-    pi = step * sum;
+    program_result = calculate_the_integral();
+    
     double end_time = omp_get_wtime();
 
-    omp_get_schedule(&loop_schema,&chunks_amount);
-
-    char str_used_schema_type[20];
+    omp_get_schedule(&loop_schema,&chunks_amount);  
 
     strcpy(str_used_schema_type,set_used_schema_type(loop_schema));
 
-    printf("\nResult  is: %f. \nAnd it was counted in %f seconds.\n",pi,end_time-start_time);
+    printf("\nResult  is: %f. \nAnd it was counted in %f seconds.\n",program_result,end_time-start_time);
     printf("With %d threads, %s schema and %d chunks. \n\n",threads_amount,str_used_schema_type,chunks_amount);
 } 
 
@@ -135,4 +129,26 @@ void configure_parallel_environment()
     threads_amount = get_amount_of("threads");
     loop_schema = get_schema_of_loop();
     chunks_amount = get_amount_of("chunks");
+}
+
+void set_parallel_environment()
+{
+    omp_set_num_threads(threads_amount);
+    omp_set_schedule(loop_schema,chunks_amount);
+}
+
+double calculate_the_integral()
+{
+    double result,sum = 0.0;
+    int i;
+    step = 1.0/(double) num_steps;
+
+    start_time = omp_get_wtime();
+    #pragma omp parallel for reduction(+ : sum)
+    for(i=0;i<num_steps;i++){
+        sum += 4.0/(1.0+((i+0.5)*step)*((i+0.5)*step));
+    }
+    result = step * sum;
+    end_time = omp_get_wtime();
+    return result;
 }
