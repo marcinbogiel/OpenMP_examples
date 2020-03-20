@@ -14,19 +14,20 @@ double step;
 omp_sched_t get_schema_of_loop();
 int get_amount_of(char *picked_item);
 const char * set_used_schema_type(omp_sched_t loop_schema);
+void configure_parallel_environment();
+
+int threads_amount;
+omp_sched_t loop_schema;
+int chunks_amount;
 
 int main(int argc, char *argv)
 { 
     int i;
     double pi, sum = 0.0;
     step = 1.0/(double) num_steps;
+    
 
-    char operation[8];
-    int threads_amount = get_amount_of("threads");
-
-    omp_sched_t loop_schema = get_schema_of_loop();
-
-    int chunks_amount = get_amount_of("chunks");
+    configure_parallel_environment();
 
     omp_set_num_threads(threads_amount);
     omp_set_schedule(loop_schema,chunks_amount);
@@ -127,4 +128,11 @@ const char * set_used_schema_type(omp_sched_t loop_schema)
             return "not defined";
             break;
     }
+}
+
+void configure_parallel_environment()
+{
+    threads_amount = get_amount_of("threads");
+    loop_schema = get_schema_of_loop();
+    chunks_amount = get_amount_of("chunks");
 }
