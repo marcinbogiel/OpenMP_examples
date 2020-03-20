@@ -17,32 +17,21 @@ const char * set_used_schema_type(omp_sched_t loop_schema);
 void configure_parallel_environment();
 void set_parallel_environment();
 double calculate_the_integral();
+void display_summary();
 
 int threads_amount;
 omp_sched_t loop_schema;
 int chunks_amount;
 double program_result;
 double start_time, end_time;
+char str_used_schema_type[20];
 
 int main(int argc, char *argv)
 { 
-    char str_used_schema_type[20];
-    
     configure_parallel_environment();
     set_parallel_environment();
-
-    
-
     program_result = calculate_the_integral();
-    
-    double end_time = omp_get_wtime();
-
-    omp_get_schedule(&loop_schema,&chunks_amount);  
-
-    strcpy(str_used_schema_type,set_used_schema_type(loop_schema));
-
-    printf("\nResult  is: %f. \nAnd it was counted in %f seconds.\n",program_result,end_time-start_time);
-    printf("With %d threads, %s schema and %d chunks. \n\n",threads_amount,str_used_schema_type,chunks_amount);
+    display_summary();
 } 
 
 omp_sched_t get_schema_of_loop()
@@ -151,4 +140,14 @@ double calculate_the_integral()
     result = step * sum;
     end_time = omp_get_wtime();
     return result;
+}
+
+void display_summary()
+{
+    omp_get_schedule(&loop_schema,&chunks_amount);  
+
+    strcpy(str_used_schema_type,set_used_schema_type(loop_schema));
+
+    printf("\nResult  is: %f. \nAnd it was counted in %f seconds.\n",program_result,end_time-start_time);
+    printf("With %d threads, %s schema and %d chunks. \n\n",threads_amount,str_used_schema_type,chunks_amount);
 }
