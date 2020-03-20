@@ -5,11 +5,35 @@
 #include <ctype.h>
 
 /*
-    The exercise was about experimenting with paralleled
-    program by trying out different loop schemas and chunks.
+    The exercise was about experimenting with paralleled program by 
+    trying out different loop schemas and chunks amount. To make it 
+    easier I created program which allows putting necessary numbers as 
+    parameters without necessary of compiling it after making a 
+    particular change. 
+    
+    To run it more than once you can open new Terminal window 
+    (Linux / Mac OS) and put bash commands:
 
-    I decided to improve my exercise_4_2.c solution
-    to make it fully configurable(and train my C skills too ;). 
+    for i in {1..10}; do ./program_name a b c; done;
+
+    where:
+        - program_name - compiled code given in this file;
+        - a - number of threads - integer number which indicate
+            how many threads will be used to compute the integral;
+        - b - loop schema - id of openMP schema which will be
+            used to parallel loop. Available values:
+                - 1 (static)
+                - 2 (dynamic)
+                - 3 (guided)
+                - 4 (auto)
+        - c - number of chunks which iterations of parallel loop
+            will be divided.
+
+    Example use:
+        for i in {1..10}; do ./program_name 4 2 3; done;
+
+    will run the program_name with 4 threads, dynamic loop schema
+    and 3 chunks.
     
     You can find the video with given exercise here:
     https://www.youtube.com/watch?v=8jzHiYo49G0#t=4m55s
@@ -80,10 +104,8 @@ void validate_input_data(int argc, char **argv)
                 
                 printf("\n");
                 exit(0);
-            }
-                
-        }
-        
+            }     
+        }   
     }
 }
 
