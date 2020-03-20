@@ -13,6 +13,7 @@ double step;
 
 omp_sched_t get_schema_of_loop();
 int get_amount_of(char *picked_item);
+const char * set_used_schema_type(omp_sched_t loop_schema);
 
 int main(int argc, char *argv)
 { 
@@ -45,27 +46,10 @@ int main(int argc, char *argv)
 
     char str_used_schema_type[20];
 
-    switch(loop_schema)
-    {
-        case omp_sched_static:
-            strcpy(str_used_schema_type, "static");  
-            break;
-        case omp_sched_dynamic:
-            strcpy(str_used_schema_type, "dynamic");  
-            break;
-        case omp_sched_guided:
-            strcpy(str_used_schema_type, "guided"); 
-            break;
-        case omp_sched_auto:
-            strcpy(str_used_schema_type, "auto"); 
-            break;
-        default:
-            strcpy(str_used_schema_type, "not defined");
-            break;
-    }
+    strcpy(str_used_schema_type,set_used_schema_type(loop_schema));
 
     printf("\nResult  is: %f. \nAnd it was counted in %f seconds.\n",pi,end_time-start_time);
-    printf("It was computed with %d threads, %s schema and %d chunks. \n\n",threads_amount,str_used_schema_type,chunks_amount);
+    printf("With %d threads, %s schema and %d chunks. \n\n",threads_amount,str_used_schema_type,chunks_amount);
 } 
 
 omp_sched_t get_schema_of_loop()
@@ -123,4 +107,26 @@ int get_amount_of(char *picked_item)
     }
 
     return user_pick;
+}
+
+const char * set_used_schema_type(omp_sched_t loop_schema)
+{
+    switch(loop_schema)
+    {
+        case omp_sched_static:
+            return "static";  
+            break;
+        case omp_sched_dynamic:
+            return "dynamic";  
+            break;
+        case omp_sched_guided:
+            return "guided"; 
+            break;
+        case omp_sched_auto:
+            return "auto"; 
+            break;
+        default:
+            return "not defined";
+            break;
+    }
 }
