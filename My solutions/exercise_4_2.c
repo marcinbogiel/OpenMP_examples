@@ -22,13 +22,11 @@ int main(int argc, char *argv)
     step = 1.0/(double) num_steps;
 
     char operation[8];
-    strcpy(operation, "threads");
-    int threads_amount = get_amount_of(operation);
+    int threads_amount = get_amount_of("threads");
 
     omp_sched_t loop_schema = get_schema_of_loop();
 
-    strcpy(operation, "chunks");
-    int chunks_amount = get_amount_of(operation);
+    int chunks_amount = get_amount_of("chunks");
 
     omp_set_num_threads(threads_amount);
     omp_set_schedule(loop_schema,chunks_amount);
