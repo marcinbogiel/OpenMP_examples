@@ -2,6 +2,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h>
+#include <ctype.h>
 
 /*
     The exercise was about experimenting with paralleled
@@ -17,9 +18,8 @@
 static long num_steps = 100000;
 double step; 
 
-//void configure_parallel_environment();
-void validate_input_data(int argc, char *argv);
-void set_parallel_environment(char *argv);
+void validate_input_data(int argc, char **argv);
+void set_parallel_environment(char **argv);
 void calculate_the_integral();
 void display_summary();
 omp_sched_t get_schema_of_loop();
@@ -41,31 +41,58 @@ int main(int argc, char **argv)
     display_summary();
 } 
 
-void validate_input_data(int argc, char *argv)
+void validate_input_data(int argc, char **argv)
 {
     if(argc!=4)
     {
-        
-        printf("\nERROR - 3 parameters are needed!\n");
-        printf("\nPut them and run the program again...\n");
+        printf("\nERROR - 3 parameters are needed!");
+        printf("\nPut them in console and run the program again...\n\n");
         exit(0);
     }
     else 
     {
-        if(!(isdigit(argv[1]) && isdigit(argv[2]) && isdigit(argv[3])))
+        if( (isdigit(*argv[1])==0) || (isdigit(*argv[2])==0) || (isdigit(*argv[3])==0) )
         {
-            printf("\nERROR - input value must be integer numbers!\n");
-            printf("\nCorrect them and run the program again...\n");
+            printf("\nERROR - input value must be integer numbers!");
+            printf("\nCorrect them and run the program again...\n\n");
             exit(0);
         }
+        else
+        {
+            if( (atoi(argv[1])<1) || ((atoi(argv[2])<1) || (atoi(argv[2])>4)) || (atoi(argv[3])<1))
+            {
+                if(atoi(argv[1])<1)
+                {
+                    printf("\nERROR - number of threads must be bigger then 0!");
+                    printf("\nCorrect it and run the program again...\n");
+                } 
+
+                if((atoi(argv[2])<1) || (atoi(argv[2])>4))
+                {
+                    printf("\nERROR - number of loop schema must be value between 1-4!");
+                    printf("\nCorrect it and run the program again...\n");
+                }
+
+                if(atoi(argv[3])<1)
+                {
+                    printf("\nERROR - size of the chunk must be bigger then 0!");
+                }
+                
+                printf("\n");
+                exit(0);
+            }
+                
+        }
+        
     }
 }
 
-void set_parallel_environment(char *argv)
+void set_parallel_environment(char **argv)
 {
-    threads_amount = (int)argv[0];
-    loop_schema = (int)argv[1];
-    chunks_amount = (int)argv[2];
+    threads_amount = atoi(argv[1]);
+    loop_schema = atoi(argv[2]);
+    chunks_amount = atoi(argv[3]);
+
     omp_set_num_threads(threads_amount);
     omp_set_schedule(loop_schema,chunks_amount);
 }
