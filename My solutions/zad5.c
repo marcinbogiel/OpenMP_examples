@@ -7,13 +7,11 @@
 #define MAXITER 1000
 
 struct d_complex{
-    double r;
-    double i;
+    double real;
+    double imaginary;
 };
 
 void testpoint(struct d_complex);
-
-
 
 struct d_complex complex;
 int numoutside = 0;
@@ -27,8 +25,8 @@ int main(){
     {
         for (j=0; j<NPOINTS; j++) 
         {
-            complex.r = -2.0+2.5*(double)(i)/(double)(NPOINTS)+eps;
-            complex.i = 1.125*(double)(j)/(double)(NPOINTS)+eps;
+            complex.real = -2.0+2.5*(double)(i)/(double)(NPOINTS)+eps;
+            complex.imaginary = 1.125*(double)(j)/(double)(NPOINTS)+eps;
             testpoint(complex);
         }
    }
@@ -37,7 +35,6 @@ int main(){
   error=area/(double)NPOINTS;
 
   printf("Area of Mandlebrot set = %12.8f +/- %12.8f\n",area,error);
-  printf("Correct answer should be around 1.510659\n");
 }
 
 void testpoint(struct d_complex complex)
@@ -48,15 +45,15 @@ void testpoint(struct d_complex complex)
 
     z=complex;
     for (iter=0; iter<MAXITER; iter++){
-        temp = (z.r*z.r)-(z.i*z.i)+complex.r;
-        z.i = z.r*z.i*2+complex.i;
-        z.r = temp;
+        temp = (z.real*z.real)-(z.imaginary*z.imaginary)+complex.real;
+        z.imaginary = z.real*z.imaginary*2+complex.imaginary;
+        z.real = temp;
 
-        if ((z.r*z.r+z.i*z.i)>4.0) {
+        if ((z.real*z.real+z.imaginary*z.imaginary)>4.0) {
            #pragma omp critical
            numoutside++;
            break;
         }
-  }
+    }
 }
 
