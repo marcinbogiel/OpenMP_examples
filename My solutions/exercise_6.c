@@ -2,6 +2,23 @@
 #include <stdio.h>
 #include <omp.h>
 
+/*
+   The exercise was about taking given program for computing Fibonacci 
+   numbers and make it parallel.
+
+   I decided to completely rebuild the solution to make it simpler
+   and easier to read. Instead of giving tree of structs I put the
+   array of struct as a type. The range of the array is set at 
+   compilation time.
+
+   At runtime every thread computes result for given n and put both
+   values in the array. After getting results program prints them
+   out of the parallel section.
+
+   You can find the video with given exercise here:
+   https://www.youtube.com/watch?v=I0c9-W0MBqw#t=3m06s
+*/
+
 #ifndef N
 #define N 5
 #endif
