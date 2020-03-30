@@ -2,6 +2,26 @@
 #include <stdio.h>
 #include <omp.h>
 
+/*
+   The exercise was about taking given program for computing Fibonacci 
+   numbers and make it parallel with using tasks mechanism built
+   in OpenMP.
+
+   This time I cannot call it 'my solution'. I made it compilable
+   but I didn't increase performance of the program at all. I was
+   able to solve it after taking a glance on course solution. My
+   mistake was about not implementing #pragma omp single for while loop
+   (when tasks are made). After adding missed tasking, everything 
+   worked fine.
+
+   After all, performance of exercise_6 which I made on my own
+   was actually the same as this one after using tasks(although it
+   required to completely rebuild the program).  
+
+   You can find the video with given exercise here:
+   https://www.youtube.com/watch?v=AioeS_Jo0Yg#t=10m02s
+*/
+
 #ifndef N
 #define N 5
 #endif
