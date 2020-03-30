@@ -59,8 +59,7 @@ int main(int argc, char *argv[]) {
      struct node *temp=NULL;
      struct node *head=NULL;
      
-	 printf("Process linked list\n");
-     printf("  Each linked list node will be processed by function 'processwork()'\n");
+
      printf("  Each ll node will compute %d fibonacci numbers beginning with %d\n",N,FS);      
  
      p = init_list(p);
@@ -70,14 +69,18 @@ int main(int argc, char *argv[]) {
      {
         #pragma omp parallel
         #pragma omp single
-        while (p != NULL) {
-            #pragma omp task shared(p) 
+        {
+           while (p != NULL) 
+            {
+            #pragma omp task firstprivate(p)
+            {
                processwork(p);
-
-            #pragma omp taskwait
+            }
 		         p = p->next;
              
+            }
         }
+        
      }
 
      end = omp_get_wtime();
