@@ -6,9 +6,9 @@
 
     The exercise was about taking written serial code for
     numerical integral computing and making it parallel 
-    with 'parallel for' construct. The main purpose of the task itself
-    was to use instructions covered in two previous lessons
-    of the course:
+    with a 'parallel for' construct. The main purpose of the 
+    task itself was to use instructions covered in two previous 
+    lessons of the course:
         - schedule clauses(with parameters);
         - reduction (picked in right place);
 

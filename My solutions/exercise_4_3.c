@@ -5,13 +5,13 @@
 #include <ctype.h>
 
 /*
-    The exercise was about experimenting with paralleled program by 
-    trying out different loop schemas and chunks amount. To make it 
-    easier I created program which allows putting necessary numbers as 
-    parameters without necessary of compiling it after making a 
-    particular change. 
+    The exercise was about experimenting with the paralleled program
+    by trying out different loop schemas and chunks amount. To make 
+    it easier I created the program which allows putting necessary 
+    numbers as parameters without necessary of compiling it after 
+    making a particular change. 
     
-    To run it more than once you can open new Terminal window 
+    To run it more than once you can open a new Terminal window 
     (Linux / Mac OS) and put bash commands:
 
     for i in {1..10}; do ./program_name a b c; done;
@@ -36,7 +36,7 @@
     and 3 chunks.
     
     You can find the video with given exercise here:
-    https://www.youtube.com/watch?v=8jzHiYo49G0#t=4m55s
+    https://www.youtube.com/watch?v=8jzHiYo49G0#t=5m11s
 */
   
 static long num_steps = 100000;

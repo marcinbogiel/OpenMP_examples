@@ -4,25 +4,25 @@
 #include <omp.h>
 
 /*
-    The exercise was about fixing given program for computing
+    The exercise was about fixing the given program for computing
     the area of a Mandelbrot set. 
     
     The biggest issue was global and common j variable for
-    every thread. I put it to private section — i variable 
+    every thread. I put it to the private section — i variable 
     was private by default because of parallel for.
 
     The second issue was only initiating private variable eps
     without getting value from global eps. Without firstprivate 
-    reading that would work fine too but time of code execution
+    reading that would work fine too but the time of code execution
     would be a way longer.
 
     Another issue was testpoint() method which didn't require
     any parameter. As result, it completely ignored values computed
-    in parallel sections and didn't update final result correctly. 
+    in parallel sections and didn't update the final result correctly. 
 
     The last problem was incrementing numoutside. Because method
-    testpoint() were running by many threads there was a problem that 
-    many of them tried to increment it in the same time. omp criticial
+    testpoint() was running by many threads there was a problem that 
+    many of them tried to increment at in the same time. omp criticial
     remove the problem allowing only one thread at the time to increment 
     the value. 
     

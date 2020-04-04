@@ -10,9 +10,12 @@
         - atomic;
         - barrier;
 
-    I realise that it should be written with parallel for
+    I realize that it should be written with parallel for
     instruction but the part of this exercise was to write 
     the code only with instructions already covered in the course. 
+
+    You can find the video with given exercise here:
+    https://www.youtube.com/watch?v=WcPZLJKtywc#t=7m56s
 */
   
 static long num_steps = 100000;

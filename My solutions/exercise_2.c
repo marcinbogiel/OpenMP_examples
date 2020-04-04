@@ -11,13 +11,16 @@
         - int omp_get_thread_num();
         - double omp_get_wtime();
 
-    I kept original serial code to compare its execution 
+    I kept the original serial code to compare its execution 
     with paralleled one. In 9/10 cases, paralleled one worked
     a bit faster in my environment.
 
-    I realise that it should be written with parallel for
+    I realize that it should be written with parallel for
     instruction but the part of this exercise was to write 
-    the code only with instructions already covered in the course. 
+    the code only with instructions already covered in the course.
+
+    You can find the video with given exercise here:
+    https://www.youtube.com/watch?v=FQ1k_YpyG_A#t=9m46s 
 */
   
 static long num_steps = 100000;

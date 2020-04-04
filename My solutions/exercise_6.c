@@ -7,12 +7,12 @@
    numbers and make it parallel.
 
    I decided to completely rebuild the solution to make it simpler
-   and easier to read. Instead of giving tree of structs I put the
-   array of struct as a type. The range of the array is set at 
+   and easier to read. Instead of giving tree of structs, I put the
+   array of the struct as a type. The range of the array is set at 
    compilation time.
 
-   At runtime every thread computes result for given n and put both
-   values in the array. After getting results program prints them
+   At runtime, every thread computes the result for given n and puts
+   both values in the array. After getting results program prints them
    out of the parallel section.
 
    You can find the video with given exercise here:
