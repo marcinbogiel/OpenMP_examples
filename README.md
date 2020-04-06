@@ -23,10 +23,10 @@ and put:
 ```
 /usr/local/bin/
 ```
-Check your gcc file. For example it was gcc-9 in my case.
+Check your gcc file. For example, it was gcc-9 in my case.
 
 # Running programs in gcc with OpenMP on Mac OS
-Open new Terminal window in folder with cloned programs and put:
+Open new Terminal window in a folder with cloned programs and put:
 
 ```
 gcc-9 -fopenmp your_open_mp_program_name.c -o output_name
@@ -46,4 +46,4 @@ for i in {1..10}; do ./output_name parameter_1 parameter_2; done;
 
 Compiling tips:
 1. Don't forget to put '-fopenmp' after gcc declaration. Otherwise compiler won't recognize <omp.h>
-2. gcc-9 is my compiler file(check installing gcc in previous section). Running it just as 'gcc -fopenmp...' doesn't work.
+2. gcc-9 is my compiler file(check installing gcc in the previous section). Running it just as 'gcc -fopenmp...' doesn't work.
