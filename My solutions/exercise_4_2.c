@@ -10,10 +10,11 @@
     I decided to completely rebuild my exercise_4.c solutions
     to make it fully configurable(and train my C skills too ;). 
     Right now it's possible to experiment without recompiling it 
-    every time when there is a need to change loop schema or chunks amout.
+    every time when there is a need to change loop schema or 
+    chunks amount.
 
     You can find the video with given exercise here:
-    https://www.youtube.com/watch?v=8jzHiYo49G0#t=4m55s
+    https://www.youtube.com/watch?v=8jzHiYo49G0#t=5m11s
 */
   
 static long num_steps = 100000;
