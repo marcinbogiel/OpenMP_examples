@@ -1,5 +1,6 @@
 # OpenMP_examples
-My solutions for problems given in <a href="https://www.youtube.com/watch?v=nE-xN4Bf8XI&list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG" target="_blank">'Introduction to OpenMP' course by Tim Mattson</a>. 
+My solutions for problems given in <a href="https://www.youtube.com/watch?v=nE-xN4Bf8XI&list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG" target="_blank">'Introduction to OpenMP' course by Tim Mattson</a>.
+I do also recommend you check the <a href="https://www.openmp.org/wp-content/uploads/Intro_To_OpenMP_Mattson.pdf" >course slides</a> and <a href="https://www.youtube.com/redirect?redir_token=uu2vwOEKbSBDzcTbeTxF9LUOl-58MTU4NjI2ODg3NUAxNTg2MTgyNDc1&event=video_description&v=nE-xN4Bf8XI&q=http%3A%2F%2Fopenmp.org%2Fmp-documents%2FMattson_OMP_exercises.zip">exercise files<a/>.
 
 I compiled all the programs on Mac OS with gcc compiler(version 9.2.*).
 
